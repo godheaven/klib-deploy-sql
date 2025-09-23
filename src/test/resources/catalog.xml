@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<catalog>
+        
+    <database>
+        <label>KANOPUS-LOCAL</label>
+        <scripts>
+            <script onetime="true" type="DATA" label="test1">src/test/resources/scripts/test1.sql</script>
+            <script onetime="false" type="DATA" label="test2">src/test/resources/scripts/test2.sql</script>
+        </scripts>
+    </database>
+     
+</catalog>

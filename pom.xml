@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+	<parent>
+		<groupId>cl.kanopus</groupId>
+		<artifactId>kanopus-core-parent</artifactId>
+		<version>3.5.6.1</version>
+	</parent>
+
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>cl.kanopus.util</groupId>
+	<artifactId>klib-deploy-sql</artifactId>
+	<version>3.0.0</version>
+
+	<name>klib-deploy-sql</name>
+	<description>
+		Klib Deploy SQL is a lightweight Java library that simplifies connecting to multiple databases and executing SQL
+		scripts in a consistent and automated way.
+	</description>
+
+	<scm>
+		<connection>scm:git:https://github.com/godheaven/klib-deploy-sql.git</connection>
+		<developerConnection>scm:git:https://github.com/godheaven/klib-deploy-sql.git</developerConnection>
+		<url>https://github.com/godheaven/klib-deploy-sql</url>
+		<tag>HEAD</tag>
+	</scm>
+
+	<properties>
+		<maven.test.skip>false</maven.test.skip>
+		<license.skip>false</license.skip>
+		<proguard.skip>false</proguard.skip>
+	</properties>
+
+	<dependencies>
+		<!-- API JAXB -->
+		<dependency>
+			<groupId>jakarta.xml.bind</groupId>
+			<artifactId>jakarta.xml.bind-api</artifactId>
+		</dependency>
+
+		<!-- Implementation of JAXB -->
+		<dependency>
+			<groupId>com.sun.xml.bind</groupId>
+			<artifactId>jaxb-impl</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>com.microsoft.sqlserver</groupId>
+			<artifactId>mssql-jdbc</artifactId>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>com.oracle.database.jdbc</groupId>
+			<artifactId>ojdbc8</artifactId>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>cl.kanopus.util</groupId>
+			<artifactId>klib-common</artifactId>
+			<version>3.0.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-jdbc</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-logging</artifactId>
+		</dependency>
+
+	</dependencies>
+
+
+</project>
