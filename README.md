@@ -1,3 +1,8 @@
+![Logo](https://www.kanopus.cl/admin/javax.faces.resource/images/logo-grey.png.xhtml?ln=paradise-layout)
+
+
+[![Maven Central](https://img.shields.io/maven-central/v/cl.kanopus.util/klib-deploy-sql.svg?label=Maven%20Central)](https://central.sonatype.com/artifact/cl.kanopus.util/klib-deploy-sql)
+
 # Klib Deploy SQL
 
 **Klib Deploy SQL** is a lightweight Java library that simplifies connecting to multiple databases and executing SQL
@@ -65,6 +70,18 @@ public class DeployExample {
 
 ---
 
-## 📄 License
 
-Released under the [Apache License 2.0](https://www.apache.org/licenses/LICENSE-2.0).  
+## Authors
+
+- [@pabloandres.diazsaavedra](https://www.linkedin.com/in/pablo-diaz-saavedra-4b7b0522/)
+
+## License
+
+This software is licensed under the Apache License, Version 2.0. See the LICENSE file for details.
+I hope you enjoy it.
+
+[![Apache License, Version 2.0](https://img.shields.io/badge/license-Apache%20License%202.0-blue.svg)](https://opensource.org/license/apache-2-0)
+
+## Support
+
+For support, email soporte@kanopus.cl
