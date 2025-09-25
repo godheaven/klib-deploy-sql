@@ -1,5 +1,5 @@
 CREATE TABLE CATALOG_SCRIPT_SQL_EXECUTION (
-CATALOG_ID      character varying(20)  NOT NULL,
+CATALOG_ID      character varying(50)  NOT NULL,
 EXECUTION_DATE  DATE NOT NULL,
 MILISECONDS     integer NOT NULL,
 STATUS          character varying(10)  NOT NULL CHECK (STATUS IN ('SUCCESS','ERROR')),
