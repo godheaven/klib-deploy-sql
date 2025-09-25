@@ -131,9 +131,9 @@ public abstract class AbstractDAO {
         return text;
     }
 
-    protected List find(String sql, RowMapper rowMapper, Object... params) throws SQLException {
+    protected List<Object> find(String sql, RowMapper<?> rowMapper, Object... params) throws SQLException {
 
-        List list = new ArrayList();
+        List<Object> list = new ArrayList<>();
         ResultSet resultset = null;
         PreparedStatement prepareStatement = null;
         try {
@@ -162,9 +162,9 @@ public abstract class AbstractDAO {
         return list;
     }
 
-    private List convertResultSetToRowMapper(ResultSet rs, RowMapper rowMapper) throws SQLException {
+    private List<Object> convertResultSetToRowMapper(ResultSet rs, RowMapper<?> rowMapper) throws SQLException {
         int i = 0;
-        List list = new ArrayList();
+        List<Object> list = new ArrayList<>();
         while (rs.next()) {
             list.add(rowMapper.mapRow(rs, i++));
         }

@@ -27,8 +27,7 @@ import cl.kanopus.common.util.FileUtils;
 import cl.kanopus.deploysql.application.config.Catalog;
 import jakarta.xml.bind.JAXBContext;
 import jakarta.xml.bind.Unmarshaller;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.xml.sax.SAXException;
 
 import javax.xml.XMLConstants;
@@ -38,10 +37,11 @@ import javax.xml.validation.SchemaFactory;
 import javax.xml.validation.Validator;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 
+@Slf4j
 public class CatalogUtils {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(CatalogUtils.class);
 
     private CatalogUtils() {
         throw new IllegalStateException("Utility class");
@@ -50,30 +50,34 @@ public class CatalogUtils {
     public static Catalog loadCatalog(String file) throws Exception {
         JAXBContext jaxbContext = JAXBContext.newInstance(Catalog.class);
         Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
-        try {
-            File xsd = FileUtils.getFile("catalog.xsd", "./catalog.xsd", "../catalog.xsd");
-            LOGGER.debug("catalog.xsd loaded successfull");
-            File xml = FileUtils.getFile(file, "catalog.xml", "./catalog.xml", "../catalog.xml");
-            LOGGER.debug("catalog.xml loaded successfull");
 
-            CatalogUtils.validateXMLSchema(xsd, xml);
-            return (Catalog) jaxbUnmarshaller.unmarshal(xml);
-        } catch (Exception ex) {
-            LOGGER.error("Error trying to loading catalog.xml file", ex);
-            throw ex;
-        }
+        File xml = FileUtils.getFile(file, "catalog.xml", "./catalog.xml", "../catalog.xml");
+        log.debug("catalog.xml loaded successfully with path: {}", xml.getAbsolutePath());
 
+        CatalogUtils.validateXMLSchema(xml);
+        return (Catalog) jaxbUnmarshaller.unmarshal(xml);
     }
 
-    public static void validateXMLSchema(File xsd, File xml) throws SAXException, IOException {
+    public static void validateXMLSchema(File xml) throws SAXException, IOException {
+        log.info("Starting XML validation against XSD schema.");
 
         SchemaFactory factory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
-        // Previene XXE al deshabilitar DOCTYPE y entidades externas
+        // Prevent XXE by disabling DOCTYPE and external entities
         factory.setProperty(XMLConstants.ACCESS_EXTERNAL_DTD, "");
         factory.setProperty(XMLConstants.ACCESS_EXTERNAL_SCHEMA, "");
-        Schema schema = factory.newSchema(xsd);
-        Validator validator = schema.newValidator();
-        validator.validate(new StreamSource(xml));
+
+        // 1) Open catalog.xsd from classpath (into de JAR)
+        try (InputStream xsdIn = CatalogUtils.class.getResourceAsStream("/catalog.xsd")) {
+            if (xsdIn == null) {
+                throw new IOException("catalog.xsd not found on classpath");
+            }
+
+            // Compile the schema
+            Schema schema = factory.newSchema(new StreamSource(xsdIn));
+            // Validate the XML
+            Validator validator = schema.newValidator();
+            validator.validate(new StreamSource(xml));
+        }
 
     }
 

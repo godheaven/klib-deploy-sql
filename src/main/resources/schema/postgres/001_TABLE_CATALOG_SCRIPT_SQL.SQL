@@ -1,7 +1,7 @@
 CREATE TABLE CATALOG_SCRIPT_SQL (
-CATALOG_ID    character varying(20) NOT NULL,
+CATALOG_ID    character varying(50) NOT NULL,
 OBJECT_TYPE   character varying(32)  NOT NULL,
-OBJECT_NAME   character varying(50)  NOT NULL,
+LABEL   character varying(50)  NOT NULL,
 FILENAME      character varying(255)  NOT NULL,
 ONE_TIME      CHAR(1) NOT NULL CHECK (ONE_TIME ='1' OR ONE_TIME ='0'),
 

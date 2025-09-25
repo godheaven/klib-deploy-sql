@@ -49,7 +49,7 @@ public class DeploySQL {
     }
 
     public int execute() throws Exception {
-        return execute("catalog.xml");
+        return execute("./catalog.xml");
     }
 
     public int execute(String catalogXml) throws Exception {
@@ -118,10 +118,8 @@ public class DeploySQL {
             }
 
         } catch (SQLException e) {
-            logger.error("Occurred a error connection: ", e);
             throw e;
         } catch (Exception ex) {
-            logger.error("Exception connection: {} ", ex.getMessage());
             throw ex;
         } finally {
             logger.info("[{}] The database connection is closed ", label);

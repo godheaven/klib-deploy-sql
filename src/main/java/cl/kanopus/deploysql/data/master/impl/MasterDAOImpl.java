@@ -25,8 +25,7 @@ package cl.kanopus.deploysql.data.master.impl;
 
 import cl.kanopus.deploysql.data.impl.AbstractDAO;
 import cl.kanopus.deploysql.data.master.MasterDAO;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
@@ -35,6 +34,7 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.sql.SQLException;
 import java.util.Date;
+import java.util.UUID;
 
 /**
  *
@@ -42,17 +42,14 @@ import java.util.Date;
  * @email pabloandres.diazsaavedra@gmail.com
  * @company Kanopus.cl
  */
+@Slf4j
 public class MasterDAOImpl extends AbstractDAO implements MasterDAO {
-
-    private static final Logger LOGGER = LoggerFactory.getLogger(MasterDAOImpl.class);
 
     @Override
     public void openConnection(String label, String user, String password, String jdbcUrl) throws SQLException {
         Integer timeout = 30;
-        LOGGER.debug("[{}] Getting connection to database --> user:[{}],  timeout: [{}], url: [{}]", label, user, timeout, jdbcUrl);
-
+        log.debug("[{}] Getting connection to database --> user:[{}],  timeout: [{}], url: [{}]", label, user, timeout, jdbcUrl);
         openConnection(jdbcUrl, user, password, timeout);
-
     }
 
     @Override
@@ -60,11 +57,11 @@ public class MasterDAOImpl extends AbstractDAO implements MasterDAO {
 
         if (!existTableCatalogScript()) {
             createTableCatalogScript();
-            LOGGER.info("schema catalog scripts table has been created successfully");
+            log.info("schema catalog scripts table has been created successfully");
         }
         if (!existTableCatalogExecution()) {
             createTableCatalogExecution();
-            LOGGER.info("schema catalog execution table has been created successfully");
+            log.info("schema catalog execution table has been created successfully");
         }
 
     }
@@ -74,7 +71,7 @@ public class MasterDAOImpl extends AbstractDAO implements MasterDAO {
         boolean execute = false;
         try {
             if (!existFileNameExecuted(filename)) {
-                String catalogId = (new Date()).getTime() + "_" + Thread.currentThread().getId();
+                String catalogId = (new Date()).getTime() + "_" + UUID.randomUUID();
                 insertCatalog(catalogId, type, objectname, filename, onetime);
                 execute = true;
             } else {
@@ -84,7 +81,7 @@ public class MasterDAOImpl extends AbstractDAO implements MasterDAO {
                 }
             }
         } catch (SQLException ex) {
-            LOGGER.error("Error save Catalog ", ex.getMessage());
+            log.error("Error save catalog: {} ", ex.getMessage());
         }
         return execute;
     }
@@ -95,7 +92,7 @@ public class MasterDAOImpl extends AbstractDAO implements MasterDAO {
             String catalogId = getCatalogId(filename);
             insertCatalogExecution(catalogId, timeExecution, status, messageError);
         } catch (SQLException ex) {
-            LOGGER.error("Error save Catalog execution ", ex);
+            log.error("Error save Catalog execution ", ex);
         }
     }
 
@@ -136,7 +133,7 @@ public class MasterDAOImpl extends AbstractDAO implements MasterDAO {
         return exist;
     }
 
-    private void createTableCatalogScript() throws SQLException {
+    private void createTableCatalogScript() {
         executeScriptAudit("001_TABLE_CATALOG_SCRIPT_SQL.SQL");
     }
 
@@ -151,7 +148,7 @@ public class MasterDAOImpl extends AbstractDAO implements MasterDAO {
         return exist;
     }
 
-    private void createTableCatalogExecution() throws SQLException {
+    private void createTableCatalogExecution() {
         executeScriptAudit("002_TABLE_CATALOG_SCRIPT_SQL_EXECUTION.SQL");
     }
 
@@ -177,7 +174,7 @@ public class MasterDAOImpl extends AbstractDAO implements MasterDAO {
 
     private void insertCatalog(String catalogId, String type, String objectname, String filename, Boolean onetime) throws SQLException {
         StringBuilder sb = new StringBuilder();
-        sb.append("INSERT INTO catalog_script_sql (catalog_id, object_type, object_name, filename, one_time) ");
+        sb.append("INSERT INTO catalog_script_sql (catalog_id, object_type, label, filename, one_time) ");
         sb.append("VALUES (?,?,?,?,?)");
         execute(sb.toString(), catalogId, type, objectname, filename.toUpperCase(), Boolean.TRUE.equals(onetime) ? "1" : "0");
 

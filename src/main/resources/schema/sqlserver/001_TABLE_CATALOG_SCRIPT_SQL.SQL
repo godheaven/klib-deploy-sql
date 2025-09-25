@@ -1,7 +1,7 @@
 CREATE TABLE CATALOG_SCRIPT_SQL (
-CATALOG_ID    varchar (20) NOT NULL,
+CATALOG_ID    varchar (50) NOT NULL,
 OBJECT_TYPE   varchar (32) NOT NULL,
-OBJECT_NAME   varchar (50) NOT NULL,
+LABEL   varchar (50) NOT NULL,
 FILENAME      varchar (255) NOT NULL UNIQUE,
 ONE_TIME      varchar (1) NOT NULL
 );

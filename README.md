@@ -1,5 +1,5 @@
-![Logo](https://www.kanopus.cl/admin/javax.faces.resource/images/logo-grey.png.xhtml?ln=paradise-layout)
 
+![Logo](https://www.kanopus.cl/admin/javax.faces.resource/images/logo-grey.png.xhtml?ln=paradise-layout)
 
 [![Maven Central](https://img.shields.io/maven-central/v/cl.kanopus.util/klib-deploy-sql.svg?label=Maven%20Central)](https://central.sonatype.com/artifact/cl.kanopus.util/klib-deploy-sql)
 
@@ -37,13 +37,31 @@ Add the dependency to your `pom.xml`:
 <dependency>
 	<groupId>cl.kanopus.util</groupId>
 	<artifactId>klib-deploy-sql</artifactId>
-	<version>3.0.0</version>
+	<version>3.0.1</version>
 </dependency>
 ```
 
 ---
 
 ## 🛠️ Usage Example
+
+catalog.xml
+
+```xml 
+<?xml version="1.0" encoding="UTF-8"?>
+<catalog>
+
+	<database>
+		<label>KANOPUS-LOCAL</label>
+		<scripts>
+			<script onetime="true" type="DATA" label="test1">your_scripts_folder/test1.sql</script>
+			<script onetime="false" type="DATA" label="test2">your_scripts_folder/test2.sql</script>
+		</scripts>
+	</database>
+
+</catalog>
+
+```
 
 ```java
 import cl.kanopus.deploysql.DeploySQL;
@@ -55,7 +73,7 @@ public class DeployExample {
         String password = "secret";
 
         DeploySQL deploy = new DeploySQL(user, password, url);
-        deploy.execute();
+        deploy.execute("./catalog.xml");
     }
 }
 ```
@@ -69,7 +87,6 @@ public class DeployExample {
 - Running repeatable deployment scripts across multiple database types.
 
 ---
-
 
 ## Authors
 
