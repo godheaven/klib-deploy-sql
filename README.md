@@ -1,4 +1,4 @@
-![Logo](https://www.kanopus.cl/admin/javax.faces.resource/images/logo-gray.png.xhtml?ln=paradise-layout)
+![Logo](https://www.kanopus.cl/assets/kanopus-grey.png)
 
 [![Maven Central](https://img.shields.io/maven-central/v/cl.kanopus.util/klib-deploy-sql.svg?label=Maven%20Central)](https://central.sonatype.com/artifact/cl.kanopus.util/klib-deploy-sql)
 
@@ -36,7 +36,7 @@ Add the dependency to your `pom.xml`:
 <dependency>
 	<groupId>cl.kanopus.util</groupId>
 	<artifactId>klib-deploy-sql</artifactId>
-	<version>3.58.0</version>
+	<version>3.59.0</version>
 </dependency>
 ```
 

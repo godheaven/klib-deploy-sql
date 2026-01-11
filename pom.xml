@@ -5,13 +5,12 @@
 	<parent>
 		<groupId>cl.kanopus</groupId>
 		<artifactId>kanopus-core-parent</artifactId>
-		<version>3.58.0</version>
+		<version>3.59.0</version>
 	</parent>
 
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>cl.kanopus.util</groupId>
 	<artifactId>klib-deploy-sql</artifactId>
-	<version>3.58.0</version>
 
 	<name>klib-deploy-sql</name>
 	<description>
@@ -30,6 +29,7 @@
 		<maven.test.skip>false</maven.test.skip>
 		<license.skip>false</license.skip>
 		<proguard.skip>true</proguard.skip>
+		<jacoco.minimum.coverage>0.60</jacoco.minimum.coverage>
 	</properties>
 
 	<dependencies>
