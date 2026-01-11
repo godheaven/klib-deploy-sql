@@ -49,11 +49,13 @@ public abstract class AbstractDAO {
         databaseType = null;
     }
 
-    protected DatabaseType openConnection(String url, String user, String password, Integer timeout) throws SQLException {
+    protected DatabaseType openConnection(String url, String user, String password, Integer timeout)
+            throws SQLException {
         try {
             String driverClass = evaluateDriverClass(url);
             Class.forName(driverClass);
-            DriverManager.setLoginTimeout(timeout == null ? 30 : timeout);// timeout is only how long the DriverManager waits for a connection
+            DriverManager.setLoginTimeout(timeout == null ? 30 : timeout);// timeout is only how long the DriverManager
+                                                                          // waits for a connection
             connection = DriverManager.getConnection(url, user, password);
             databaseType = evaluateType(url);
             return databaseType;
@@ -173,7 +175,8 @@ public abstract class AbstractDAO {
 
     protected void executeScriptAudit(String filename) {
         String path = databaseType.getSchemaPath() + filename;
-        ScriptUtils.executeSqlScript(connection, new EncodedResource(new ClassPathResource(path), StandardCharsets.UTF_8));
+        ScriptUtils.executeSqlScript(connection,
+                new EncodedResource(new ClassPathResource(path), StandardCharsets.UTF_8));
     }
 
     protected void executeScriptSql(String filename) {
@@ -192,9 +195,12 @@ public abstract class AbstractDAO {
             driverClass = DatabaseType.SQLSERVER.getDriverClass();
         } else if (url.startsWith(DatabaseType.POSTGRES.getPrefix())) {
             driverClass = DatabaseType.POSTGRES.getDriverClass();
+        } else if (url.startsWith(DatabaseType.DB2.getPrefix())) {
+            driverClass = DatabaseType.DB2.getDriverClass();
         }
         if (driverClass == null) {
-            throw new UnsupportedOperationException("Cannot determine driverClass related to connection url.\nThere is only support for the following database types: Oracle, Sql Server, Postgresql");
+            throw new UnsupportedOperationException(
+                    "Cannot determine driverClass related to connection url.\nThere is only support for the following database types: Oracle, Sql Server, Postgresql, DB2");
         }
         return driverClass;
     }
@@ -207,9 +213,12 @@ public abstract class AbstractDAO {
             databaseTypeLocal = DatabaseType.SQLSERVER;
         } else if (url.startsWith(DatabaseType.POSTGRES.getPrefix())) {
             databaseTypeLocal = DatabaseType.POSTGRES;
+        } else if (url.startsWith(DatabaseType.DB2.getPrefix())) {
+            databaseTypeLocal = DatabaseType.DB2;
         }
         if (databaseTypeLocal == null) {
-            throw new UnsupportedOperationException("Cannot determine data type related to connection url.\nThere is only support for the following database types: Oracle, Sql Server, Postgresql");
+            throw new UnsupportedOperationException(
+                    "Cannot determine data type related to connection url.\nThere is only support for the following database types: Oracle, Sql Server, Postgresql, DB2");
         }
         return databaseTypeLocal;
     }

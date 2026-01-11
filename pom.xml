@@ -64,6 +64,12 @@
 		</dependency>
 
 		<dependency>
+			<groupId>com.ibm.db2</groupId>
+			<artifactId>jcc</artifactId>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
 			<groupId>cl.kanopus.util</groupId>
 			<artifactId>klib-common</artifactId>
 		</dependency>

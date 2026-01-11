@@ -14,7 +14,7 @@ engines.
 ## ✨ Features
 
 - 🔗 **Multi-database support**  
-  Works with PostgreSQL, Oracle, SQL Server, and other JDBC-compatible databases.
+  Works with PostgreSQL, Oracle, SQL Server, DB2, and other JDBC-compatible databases.
 
 - 📜 **Script execution**  
   Run raw SQL scripts or batches in a reliable and consistent way.
