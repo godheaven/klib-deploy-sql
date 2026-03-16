@@ -1,8 +1,10 @@
-![Logo](https://www.kanopus.cl/assets/kanopus-grey.png)
+<p align="left">
+  <img src="https://www.kanopus.cl/assets/kanopus_black.png" width="220"/>
+</p>
 
-[![Maven Central](https://img.shields.io/maven-central/v/cl.kanopus.util/klib-deploy-sql.svg?label=Maven%20Central)](https://central.sonatype.com/artifact/cl.kanopus.util/klib-deploy-sql)
+![Maven](https://img.shields.io/maven-central/v/cl.kanopus.util/klib-deploy-sql) ![License](https://img.shields.io/badge/license-Apache%20License%202.0-blue) ![Java](https://img.shields.io/badge/java-17+-orange)
 
-# Klib Deploy SQL
+# klib-deploy-sql
 
 **Klib Deploy SQL** is a lightweight Java library that simplifies connecting to multiple databases and executing SQL
 scripts in a consistent and automated way.  
@@ -19,11 +21,26 @@ engines.
 - 📜 **Script execution**  
   Run raw SQL scripts or batches in a reliable and consistent way.
 
+- 🔁 **One-time & repeatable scripts**  
+  Mark scripts as `onetime="true"` to run them only once, or `onetime="false"` to run them on every deployment.
+
+- 🗂️ **Automatic schema management**  
+  Automatically creates internal tracking tables (`CATALOG_SCRIPT_SQL` and `CATALOG_SCRIPT_SQL_EXECUTION`) to
+  record which scripts have been executed, when, and with what result.
+
+- ✅ **Execution tracking**  
+  Every script execution is recorded with its status (`SUCCESS` / `ERROR`), execution time, and error message if
+  applicable.
+
 - ⚙️ **Automation ready**  
   Useful for database initialization, deployment pipelines, and CI/CD integration.
 
 - 🧩 **Framework-agnostic**  
-  Lightweight design, no heavy dependencies. Can be used standalone or within existing applications.
+  Lightweight design, minimal dependencies. Can be used standalone or within existing applications.
+
+- 🔍 **XML validation**  
+  The `catalog.xml` file is validated against an XSD schema before execution, ensuring correctness of the
+  configuration.
 
 ---
 
@@ -36,13 +53,25 @@ Add the dependency to your `pom.xml`:
 <dependency>
 	<groupId>cl.kanopus.util</groupId>
 	<artifactId>klib-deploy-sql</artifactId>
-	<version>3.59.0</version>
+	<version>4.03.0</version>
+</dependency>
+```
+
+Add the corresponding JDBC driver for your database (example for PostgreSQL):
+
+```xml
+
+<dependency>
+	<groupId>org.postgresql</groupId>
+	<artifactId>postgresql</artifactId>
+	<version>42.7.3</version>
 </dependency>
 ```
 
 ---
 
-## 🛠️ Usage Example
+## 🚀 Usage Guide
+
 
 catalog.xml
 
@@ -88,17 +117,20 @@ public class DeployExample {
 
 ---
 
-## Authors
+## 👤 Author
 
-- [@pabloandres.diazsaavedra](https://www.linkedin.com/in/pablo-diaz-saavedra-4b7b0522/)
+**Pablo Andrés Díaz Saavedra** — Founder of **Kanopus – Estrellas del Software**
 
-## License
+Kanopus builds tools and platforms that simplify software development and DevOps processes.
 
-This software is licensed under the Apache License, Version 2.0. See the LICENSE file for details.
-I hope you enjoy it.
+[GitHub](https://github.com/godheaven) | [LinkedIn](https://www.linkedin.com/in/pablo-diaz-saavedra-4b7b0522/) | [Website](https://kanopus.cl)
+
+## 📄 License
+
+This software is licensed under the Apache License, Version 2.0. See the [LICENSE](LICENSE) file for details.
 
 [![Apache License, Version 2.0](https://img.shields.io/badge/license-Apache%20License%202.0-blue.svg)](https://opensource.org/license/apache-2-0)
 
-## Support
+## 🛟 Support
 
-For support, email soporte@kanopus.cl
+For support or questions contact: 📧 [soporte@kanopus.cl](mailto:soporte@kanopus.cl)

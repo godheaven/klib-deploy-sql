@@ -27,21 +27,19 @@ import cl.kanopus.common.util.FileUtils;
 import cl.kanopus.deploysql.application.config.Catalog;
 import jakarta.xml.bind.JAXBContext;
 import jakarta.xml.bind.Unmarshaller;
-import lombok.extern.slf4j.Slf4j;
-import org.xml.sax.SAXException;
-
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import javax.xml.XMLConstants;
 import javax.xml.transform.stream.StreamSource;
 import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
 import javax.xml.validation.Validator;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
+import lombok.extern.slf4j.Slf4j;
+import org.xml.sax.SAXException;
 
 @Slf4j
 public class CatalogUtils {
-
 
     private CatalogUtils() {
         throw new IllegalStateException("Utility class");
@@ -78,7 +76,6 @@ public class CatalogUtils {
             Validator validator = schema.newValidator();
             validator.validate(new StreamSource(xml));
         }
-
     }
 
     public static String getName(String filename) {
@@ -88,7 +85,5 @@ public class CatalogUtils {
             filename = filename.substring(lastPath + 1);
         }
         return filename;
-
     }
-
 }

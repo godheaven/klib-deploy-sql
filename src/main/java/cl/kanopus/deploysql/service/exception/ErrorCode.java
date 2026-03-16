@@ -24,12 +24,10 @@
 package cl.kanopus.deploysql.service.exception;
 
 public enum ErrorCode {
-
     UNEXPECTED_SYSTEM_EXCEPTION, //
     CATALOG_XML_INVALID, //
     UNEXPECTED_SQL_EXCEPTION, //
     DATABASE_NO_EXIST_EXCEPTION, //
     ERROR_COMUNICATION_CYBERARK, //
     UNEXPECTED_DATA_BASE_UNSUPPORTED;
-
 }

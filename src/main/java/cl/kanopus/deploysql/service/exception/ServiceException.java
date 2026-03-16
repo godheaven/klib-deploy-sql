@@ -33,13 +33,11 @@ public class ServiceException extends Exception {
     public ServiceException(ErrorCode code) {
         this.code = code;
         this.args = null;
-
     }
 
     public ServiceException(ErrorCode code, Object... args) {
         this.code = code;
         this.args = args;
-
     }
 
     public ServiceException(ErrorCode code, Throwable trow, Object... args) {
@@ -55,5 +53,4 @@ public class ServiceException extends Exception {
     public Object[] getArgs() {
         return args;
     }
-
 }
