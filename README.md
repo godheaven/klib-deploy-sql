@@ -64,14 +64,12 @@ Add the corresponding JDBC driver for your database (example for PostgreSQL):
 <dependency>
 	<groupId>org.postgresql</groupId>
 	<artifactId>postgresql</artifactId>
-	<version>42.7.3</version>
 </dependency>
 ```
 
 ---
 
 ## 🚀 Usage Guide
-
 
 catalog.xml
 
@@ -121,7 +119,8 @@ public class DeployExample {
 
 ⭐**Pablo Andrés Díaz Saavedra** — Founder of **Kanopus – Software Guided by the Stars**⭐
 
-Kanopus is building a constellation of developers creating tools, libraries and platforms that simplify software engineering.
+Kanopus is building a constellation of developers creating tools, libraries and platforms that simplify software
+engineering.
 
 [GitHub](https://github.com/godheaven) | [LinkedIn](https://www.linkedin.com/in/pablo-diaz-saavedra-4b7b0522/) | [Website](https://kanopus.cl)
 
