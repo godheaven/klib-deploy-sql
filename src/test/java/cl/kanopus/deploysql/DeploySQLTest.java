@@ -32,26 +32,17 @@ class DeploySQLTest {
     @Test
     void testExecuteWithNoDatabase() {
 
-        Exception exception =
-                Assertions.assertThrows(
-                        SQLException.class,
-                        () -> {
-                            DeploySQL deploy =
-                                    new DeploySQL(
-                                            "user_test",
-                                            "pass_test",
-                                            "jdbc:postgresql://localhost/db_test");
-                            deploy.execute();
-                        });
+        Exception exception = Assertions.assertThrows(SQLException.class, () -> {
+            DeploySQL deploy = new DeploySQL("user_test", "pass_test", "jdbc:postgresql://localhost/db_test");
+            deploy.execute();
+        });
 
-        Assertions.assertEquals(
-                "FATAL: database \"db_test\" does not exist", exception.getMessage());
+        Assertions.assertEquals("FATAL: database \"db_test\" does not exist", exception.getMessage());
     }
 
     @Test
     void testExecute() throws Exception {
-        DeploySQL deploy =
-                new DeploySQL("user_test", "pass_test", "jdbc:postgresql://localhost/test");
+        DeploySQL deploy = new DeploySQL("user_test", "pass_test", "jdbc:postgresql://localhost/test");
         int scripts = deploy.execute();
         Assertions.assertEquals(2, scripts);
     }

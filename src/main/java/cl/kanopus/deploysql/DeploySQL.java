@@ -72,8 +72,7 @@ public class DeploySQL {
 
             totalScripts = database.getScripts().getRecords().size();
 
-            logger.info(
-                    "[{}] Catalog asocciated with {} scripts for execution", label, totalScripts);
+            logger.info("[{}] Catalog asocciated with {} scripts for execution", label, totalScripts);
 
             masterDao.createSchema();
 
@@ -87,12 +86,7 @@ public class DeploySQL {
                 String scriptFilename = null;
                 try {
                     scriptFilename = CatalogUtils.getName(script.getFilename());
-                    execute =
-                            masterDao.saveCatalog(
-                                    script.getType(),
-                                    script.getLabel(),
-                                    scriptFilename,
-                                    script.getOnetime());
+                    execute = masterDao.saveCatalog(script.getType(), script.getLabel(), scriptFilename, script.getOnetime());
                     // execute script
                     if (execute) {
                         initTime = (new Date()).getTime();
@@ -108,35 +102,14 @@ public class DeploySQL {
                 } finally {
                     if (execute) {
                         if (exceptionScript == null) {
-                            logger.debug(
-                                    "[{}] [{}/{}] (SUCCESS): The script {} has been successfully executed.",
-                                    label,
-                                    countScript,
-                                    totalScripts,
-                                    scriptFilename);
-                            masterDao.saveCatalogExecution(
-                                    scriptFilename, "SUCCESS", timeExecution, "");
+                            logger.debug("[{}] [{}/{}] (SUCCESS): The script {} has been successfully executed.", label, countScript, totalScripts, scriptFilename);
+                            masterDao.saveCatalogExecution(scriptFilename, "SUCCESS", timeExecution, "");
                         } else {
-                            logger.debug(
-                                    "[{}] [{}/{}] (ERROR) Error executing script {} : {}",
-                                    label,
-                                    countScript,
-                                    totalScripts,
-                                    scriptFilename,
-                                    exceptionScript.getMessage());
-                            masterDao.saveCatalogExecution(
-                                    scriptFilename,
-                                    "ERROR",
-                                    timeExecution,
-                                    exceptionScript.getCause().getMessage());
+                            logger.debug("[{}] [{}/{}] (ERROR) Error executing script {} : {}", label, countScript, totalScripts, scriptFilename, exceptionScript.getMessage());
+                            masterDao.saveCatalogExecution(scriptFilename, "ERROR", timeExecution, exceptionScript.getCause().getMessage());
                         }
                     } else {
-                        logger.debug(
-                                "[{}] [{}/{}] (SKIPPED): The script {} has been skipped.",
-                                label,
-                                countScript,
-                                totalScripts,
-                                scriptFilename);
+                        logger.debug("[{}] [{}/{}] (SKIPPED): The script {} has been skipped.", label, countScript, totalScripts, scriptFilename);
                     }
                     countScript++;
                 }

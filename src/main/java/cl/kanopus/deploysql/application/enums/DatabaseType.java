@@ -24,21 +24,9 @@
 package cl.kanopus.deploysql.application.enums;
 
 public enum DatabaseType {
-    ORACLE(
-            "oracle.jdbc.driver.OracleDriver",
-            "jdbc:oracle:thin:@",
-            "jdbc:oracle:thin:@%s:%s:%s",
-            "schema/oracle/"),
-    SQLSERVER(
-            "com.microsoft.sqlserver.jdbc.SQLServerDriver",
-            "jdbc:sqlserver://",
-            "jdbc:sqlserver://%s:%s;databaseName=%s",
-            "schema/sqlserver/"),
-    POSTGRES(
-            "org.postgresql.Driver",
-            "jdbc:postgresql://",
-            "jdbc:postgresql://%s:%s/%s",
-            "schema/postgres/"),
+    ORACLE("oracle.jdbc.driver.OracleDriver", "jdbc:oracle:thin:@", "jdbc:oracle:thin:@%s:%s:%s", "schema/oracle/"),
+    SQLSERVER("com.microsoft.sqlserver.jdbc.SQLServerDriver", "jdbc:sqlserver://", "jdbc:sqlserver://%s:%s;databaseName=%s", "schema/sqlserver/"),
+    POSTGRES("org.postgresql.Driver", "jdbc:postgresql://", "jdbc:postgresql://%s:%s/%s", "schema/postgres/"),
     DB2("com.ibm.db2.jcc.DB2Driver", "jdbc:db2://", "jdbc:db2://%s:%s/%s", "schema/db2/");
 
     private final String driverClass;

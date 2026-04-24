@@ -33,11 +33,9 @@ public interface MasterDAO {
 
     void createSchema() throws SQLException;
 
-    boolean saveCatalog(String type, String label, String scriptName, boolean onetime)
-            throws SQLException;
+    boolean saveCatalog(String type, String label, String scriptName, boolean onetime) throws SQLException;
 
     void executeScript(String type, String filename) throws SQLException;
 
-    void saveCatalogExecution(String filename, String success, long timeExecution, String string)
-            throws SQLException;
+    void saveCatalogExecution(String filename, String success, long timeExecution, String string) throws SQLException;
 }

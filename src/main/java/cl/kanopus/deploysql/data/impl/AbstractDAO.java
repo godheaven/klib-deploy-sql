@@ -48,13 +48,11 @@ public abstract class AbstractDAO {
         databaseType = null;
     }
 
-    protected DatabaseType openConnection(String url, String user, String password, Integer timeout)
-            throws SQLException {
+    protected DatabaseType openConnection(String url, String user, String password, Integer timeout) throws SQLException {
         try {
             String driverClass = evaluateDriverClass(url);
             Class.forName(driverClass);
-            DriverManager.setLoginTimeout(
-                    timeout == null ? 30 : timeout); // timeout is only how long the DriverManager
+            DriverManager.setLoginTimeout(timeout == null ? 30 : timeout); // timeout is only how long the DriverManager
             // waits for a connection
             connection = DriverManager.getConnection(url, user, password);
             databaseType = evaluateType(url);
@@ -73,18 +71,17 @@ public abstract class AbstractDAO {
     protected long queryForLong(String sql, Object... params) throws SQLException {
         long number = 0;
 
-        try (PreparedStatement prepareStatement = connection.prepareStatement(sql); ) {
+        try (PreparedStatement prepareStatement = connection.prepareStatement(sql);) {
             if (params != null) {
                 for (int i = 0; i < params.length; i++) {
                     if (params[i] instanceof Date) {
-                        prepareStatement.setTimestamp(
-                                (i + 1), new java.sql.Timestamp(((Date) params[i]).getTime()));
+                        prepareStatement.setTimestamp((i + 1), new java.sql.Timestamp(((Date) params[i]).getTime()));
                     } else {
                         prepareStatement.setObject((i + 1), params[i]);
                     }
                 }
             }
-            try (ResultSet resultset = prepareStatement.executeQuery(); ) {
+            try (ResultSet resultset = prepareStatement.executeQuery();) {
                 if (resultset.next()) {
                     number = resultset.getLong(1);
                 } else {
@@ -101,8 +98,7 @@ public abstract class AbstractDAO {
             if (params != null) {
                 for (int i = 0; i < params.length; i++) {
                     if (params[i] instanceof Date) {
-                        prepareStatement.setTimestamp(
-                                (i + 1), new java.sql.Timestamp(((Date) params[i]).getTime()));
+                        prepareStatement.setTimestamp((i + 1), new java.sql.Timestamp(((Date) params[i]).getTime()));
                     } else {
                         prepareStatement.setObject((i + 1), params[i]);
                     }
@@ -114,18 +110,17 @@ public abstract class AbstractDAO {
 
     protected String queryForString(String sql, Object... params) throws SQLException {
         String text = null;
-        try (PreparedStatement prepareStatement = connection.prepareStatement(sql); ) {
+        try (PreparedStatement prepareStatement = connection.prepareStatement(sql);) {
             if (params != null) {
                 for (int i = 0; i < params.length; i++) {
                     if (params[i] instanceof Date) {
-                        prepareStatement.setTimestamp(
-                                (i + 1), new java.sql.Timestamp(((Date) params[i]).getTime()));
+                        prepareStatement.setTimestamp((i + 1), new java.sql.Timestamp(((Date) params[i]).getTime()));
                     } else {
                         prepareStatement.setObject((i + 1), params[i]);
                     }
                 }
             }
-            try (ResultSet resultset = prepareStatement.executeQuery(); ) {
+            try (ResultSet resultset = prepareStatement.executeQuery();) {
                 if (resultset.next()) {
                     text = resultset.getString(1);
                 }
@@ -134,8 +129,7 @@ public abstract class AbstractDAO {
         return text;
     }
 
-    protected List<Object> find(String sql, RowMapper<?> rowMapper, Object... params)
-            throws SQLException {
+    protected List<Object> find(String sql, RowMapper<?> rowMapper, Object... params) throws SQLException {
 
         List<Object> list = new ArrayList<>();
         ResultSet resultset = null;
@@ -146,8 +140,7 @@ public abstract class AbstractDAO {
             if (params != null) {
                 for (int i = 0; i < params.length; i++) {
                     if (params[i] instanceof Date) {
-                        prepareStatement.setTimestamp(
-                                (i + 1), new java.sql.Timestamp(((Date) params[i]).getTime()));
+                        prepareStatement.setTimestamp((i + 1), new java.sql.Timestamp(((Date) params[i]).getTime()));
                     } else {
                         prepareStatement.setObject((i + 1), params[i]);
                     }
@@ -166,8 +159,7 @@ public abstract class AbstractDAO {
         return list;
     }
 
-    private List<Object> convertResultSetToRowMapper(ResultSet rs, RowMapper<?> rowMapper)
-            throws SQLException {
+    private List<Object> convertResultSetToRowMapper(ResultSet rs, RowMapper<?> rowMapper) throws SQLException {
         int i = 0;
         List<Object> list = new ArrayList<>();
         while (rs.next()) {
@@ -178,9 +170,7 @@ public abstract class AbstractDAO {
 
     protected void executeScriptAudit(String filename) {
         String path = databaseType.getSchemaPath() + filename;
-        ScriptUtils.executeSqlScript(
-                connection,
-                new EncodedResource(new ClassPathResource(path), StandardCharsets.UTF_8));
+        ScriptUtils.executeSqlScript(connection, new EncodedResource(new ClassPathResource(path), StandardCharsets.UTF_8));
     }
 
     protected void executeScriptSql(String filename) {

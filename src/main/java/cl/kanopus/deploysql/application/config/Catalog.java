@@ -92,7 +92,8 @@ public class Catalog implements Serializable {
 
                 private static final long serialVersionUID = -6031760111063718871L;
 
-                @XmlValue private String filename;
+                @XmlValue
+                private String filename;
 
                 @XmlAttribute(name = "onetime")
                 private Boolean onetime;

@@ -45,8 +45,7 @@ class DatabaseTypeTest {
 
     @Test
     void testUrlFormatting() {
-        String formattedUrl =
-                String.format(DatabaseType.DB2.getUrl(), "localhost", "50000", "testdb");
+        String formattedUrl = String.format(DatabaseType.DB2.getUrl(), "localhost", "50000", "testdb");
         Assertions.assertEquals("jdbc:db2://localhost:50000/testdb", formattedUrl);
     }
 }
