@@ -6,7 +6,6 @@ on:
 
 jobs:
   publish:
+    # Tests start PostgreSQL themselves through Testcontainers (Docker is available on ubuntu-latest)
     uses: godheaven/kanopus-core-parent/.github/workflows/maven-release.yml@main
-    with:
-      postgres: true
     secrets: inherit
