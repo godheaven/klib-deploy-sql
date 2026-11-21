@@ -31,7 +31,9 @@
 		<maven.test.skip>false</maven.test.skip>
 		<license.skip>false</license.skip>
 		<proguard.skip>true</proguard.skip>
-		<jacoco.minimum.coverage>0.60</jacoco.minimum.coverage>
+		<jacoco.minimum.coverage>0.85</jacoco.minimum.coverage>
+		<!-- proguard-core required by proguard-base ${proguard-base.version} (see build section) -->
+		<proguard-core.version>9.4.0</proguard-core.version>
 	</properties>
 
 	<dependencies>
@@ -43,8 +45,8 @@
 
 		<!-- Implementation of JAXB -->
 		<dependency>
-			<groupId>com.sun.xml.bind</groupId>
-			<artifactId>jaxb-impl</artifactId>
+			<groupId>org.glassfish.jaxb</groupId>
+			<artifactId>jaxb-runtime</artifactId>
 		</dependency>
 
 		<dependency>
@@ -61,7 +63,7 @@
 
 		<dependency>
 			<groupId>com.oracle.database.jdbc</groupId>
-			<artifactId>ojdbc8</artifactId>
+			<artifactId>ojdbc11</artifactId>
 			<scope>provided</scope>
 		</dependency>
 
@@ -81,7 +83,47 @@
 			<artifactId>spring-jdbc</artifactId>
 		</dependency>
 
+		<!-- Tests: PostgreSQL in Docker through Testcontainers (versions managed by the Spring Boot BOM) -->
+		<dependency>
+			<groupId>org.testcontainers</groupId>
+			<artifactId>testcontainers-postgresql</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.testcontainers</groupId>
+			<artifactId>testcontainers-junit-jupiter</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+			<scope>test</scope>
+		</dependency>
+
 	</dependencies>
 
+	<build>
+		<plugins>
+			<!--
+				ProGuard is disabled by default (proguard.skip=true). proguard-maven-plugin 2.7.0 pins an older
+				proguard-core that is binary incompatible with proguard-base 7.10.0 (NoClassDefFoundError
+				StructuredLineNumberInfo), so the proguard-core version required by proguard-base is forced here.
+			-->
+			<plugin>
+				<groupId>com.github.wvengen</groupId>
+				<artifactId>proguard-maven-plugin</artifactId>
+				<dependencies>
+					<dependency>
+						<groupId>com.guardsquare</groupId>
+						<artifactId>proguard-core</artifactId>
+						<version>${proguard-core.version}</version>
+						<scope>runtime</scope>
+					</dependency>
+				</dependencies>
+			</plugin>
+		</plugins>
+	</build>
 
 </project>
