@@ -7,6 +7,5 @@ on:
 
 jobs:
   build:
+    # Tests start PostgreSQL themselves through Testcontainers (Docker is available on ubuntu-latest)
     uses: godheaven/kanopus-core-parent/.github/workflows/maven-build.yml@main
-    with:
-      postgres: true
