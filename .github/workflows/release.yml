@@ -1,0 +1,12 @@
+name: release
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  publish:
+    uses: godheaven/kanopus-core-parent/.github/workflows/maven-release.yml@main
+    with:
+      postgres: true
+    secrets: inherit

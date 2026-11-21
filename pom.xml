@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>cl.kanopus</groupId>
 		<artifactId>kanopus-core-parent</artifactId>
-		<version>4.06.3</version>
+		<version>4.20.0</version>
 	</parent>
 
 	<modelVersion>4.0.0</modelVersion>
@@ -17,6 +17,8 @@
 		Klib Deploy SQL is a lightweight Java library that simplifies connecting to multiple databases and executing SQL
 		scripts in a consistent and automated way.
 	</description>
+
+	<url>https://github.com/godheaven/klib-deploy-sql</url>
 
 	<scm>
 		<connection>scm:git:https://github.com/godheaven/klib-deploy-sql.git</connection>
