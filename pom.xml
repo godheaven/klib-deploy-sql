@@ -33,7 +33,7 @@
 		<proguard.skip>true</proguard.skip>
 		<jacoco.minimum.coverage>0.85</jacoco.minimum.coverage>
 		<!-- proguard-core required by proguard-base ${proguard-base.version} (see build section) -->
-		<proguard-core.version>9.4.0</proguard-core.version>
+		<proguard-core.version>9.4.1</proguard-core.version>
 	</properties>
 
 	<dependencies>
