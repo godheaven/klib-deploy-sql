@@ -56,10 +56,8 @@ public abstract class AbstractDAO {
     /**
      * Opens a JDBC connection.
      * <p>
-     * Drivers are discovered through the JDBC 4 {@link java.util.ServiceLoader} mechanism, so no {@code Class.forName}
-     * is needed. The login timeout is passed as an engine specific connection property instead of
-     * {@link DriverManager#setLoginTimeout(int)}, which is a JVM-wide setting that would affect every other
-     * connection of the application. A timeout already present in the JDBC url takes precedence.
+     * Drivers are discovered through the JDBC 4 {@link java.util.ServiceLoader} mechanism, so no {@code Class.forName} is needed. The login timeout is passed as an engine specific connection property instead of {@link DriverManager#setLoginTimeout(int)}, which is a JVM-wide setting that would affect
+     * every other connection of the application. A timeout already present in the JDBC url takes precedence.
      */
     protected DatabaseType openConnection(String url, String user, String password, Integer timeout) throws SQLException {
         try {
@@ -173,8 +171,7 @@ public abstract class AbstractDAO {
     }
 
     /**
-     * Executes a SQL script resource. The content is always decoded as UTF-8, independently of the platform default
-     * charset.
+     * Executes a SQL script resource. The content is always decoded as UTF-8, independently of the platform default charset.
      */
     protected void executeScriptSql(Resource resource) {
         ScriptUtils.executeSqlScript(connection, new EncodedResource(resource, StandardCharsets.UTF_8));

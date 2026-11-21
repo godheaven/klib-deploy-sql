@@ -37,15 +37,13 @@ public interface MasterDAO {
     /**
      * Registers a script in the catalog table and decides whether it must be executed.
      *
-     * @return {@code true} when the script must be executed: it is new, it is repeatable ({@code onetime=false}) or
-     *         it is one-time but has no successful execution recorded yet.
+     * @return {@code true} when the script must be executed: it is new, it is repeatable ({@code onetime=false}) or it is one-time but has no successful execution recorded yet.
      */
     boolean saveCatalog(String type, String label, String scriptName, boolean onetime) throws SQLException;
 
     /**
-     * Same as {@link #saveCatalog(String, String, String, boolean)}, but when no catalog row exists for
-     * {@code scriptKey} a row registered under {@code legacyScriptName} (the upper-case base filename used by versions
-     * prior to 4.20.0) is re-keyed and reused, so already executed scripts are still recognized.
+     * Same as {@link #saveCatalog(String, String, String, boolean)}, but when no catalog row exists for {@code scriptKey} a row registered under {@code legacyScriptName} (the upper-case base filename used by versions prior to 4.20.0) is re-keyed and reused, so already executed scripts are still
+     * recognized.
      */
     default boolean saveCatalog(String type, String label, String scriptKey, String legacyScriptName, boolean onetime) throws SQLException {
         return saveCatalog(type, label, scriptKey, onetime);
@@ -56,8 +54,7 @@ public interface MasterDAO {
     void saveCatalogExecution(String filename, String success, long timeExecution, String string) throws SQLException;
 
     /**
-     * Acquires the deploy lock, waiting at most {@code waitTimeout}. A lock older than {@code staleTimeout} (when not
-     * {@code null}) is considered abandoned and is broken.
+     * Acquires the deploy lock, waiting at most {@code waitTimeout}. A lock older than {@code staleTimeout} (when not {@code null}) is considered abandoned and is broken.
      */
     default void acquireLock(String owner, Duration waitTimeout, Duration staleTimeout) throws SQLException {
         // no lock support by default

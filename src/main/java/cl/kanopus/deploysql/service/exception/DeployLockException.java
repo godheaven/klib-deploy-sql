@@ -26,8 +26,7 @@ package cl.kanopus.deploysql.service.exception;
 import java.sql.SQLException;
 
 /**
- * Thrown when the deploy lock (table {@code CATALOG_SCRIPT_SQL_LOCK}) is held by another deployment and could not be
- * acquired within the configured wait timeout.
+ * Thrown when the deploy lock (table {@code CATALOG_SCRIPT_SQL_LOCK}) is held by another deployment and could not be acquired within the configured wait timeout.
  */
 public class DeployLockException extends SQLException {
 

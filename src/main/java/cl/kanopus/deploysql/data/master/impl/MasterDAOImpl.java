@@ -57,8 +57,7 @@ public class MasterDAOImpl extends AbstractDAO implements MasterDAO {
     public static final List<String> CATALOG_COLUMNS = List.of("CATALOG_ID", "OBJECT_TYPE", "LABEL", "FILENAME", "ONE_TIME");
 
     /**
-     * Columns written by {@link #saveCatalogExecution}; they must exist in
-     * {@code 002_TABLE_CATALOG_SCRIPT_SQL_EXECUTION.SQL}.
+     * Columns written by {@link #saveCatalogExecution}; they must exist in {@code 002_TABLE_CATALOG_SCRIPT_SQL_EXECUTION.SQL}.
      */
     public static final List<String> EXECUTION_COLUMNS = List.of("CATALOG_ID", "EXECUTION_DATE", "MILISECONDS", "STATUS", "EXIT_MESSAGE");
 
@@ -109,9 +108,7 @@ public class MasterDAOImpl extends AbstractDAO implements MasterDAO {
     }
 
     /**
-     * Registers the script and decides whether it must be executed. The decision is based on the catalog row plus the
-     * successful executions, so a script whose previous tracking insert failed is not skipped forever. SQL errors are
-     * propagated to the caller.
+     * Registers the script and decides whether it must be executed. The decision is based on the catalog row plus the successful executions, so a script whose previous tracking insert failed is not skipped forever. SQL errors are propagated to the caller.
      */
     @Override
     public boolean saveCatalog(String type, String objectname, String scriptKey, String legacyScriptName, boolean onetime) throws SQLException {
